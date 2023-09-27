@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: forms
+  description: API
+  version: 0.1.9
+
+servers:
+  - url: http://localhost:3000/api
+    description: production server
+  - url: http://localhost:3000/api
+    description: local server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /form:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        description: User registration request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                phone:
+                  type: "string"
+                email:
+                  type: "string"
+                plan:
+                  type: "object"
+                  properties:
+                    monthly:
+                      type: "string"
+                    yearly:
+                      type: "string"
+                addons:
+                  type: "object"
+                  properties:
+                    onlineServices:
+                      type: "boolean"
+                    largerStorage:
+                      type: "boolean"
+                    customizableProfile:
+                      type: "boolean"
+      responses:
+        '201':
+          description: User registered successfully
